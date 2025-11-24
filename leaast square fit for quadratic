@@ -10,11 +10,10 @@ Xb=sum(x.^4);
 Y=sum(y);
 Ya=sum(x.*y);
 Yb=sum(y.* (x.^2));
-A=[X Xi N;Xa X Xi;Xb Xa X]
+A=[X Xi N;Xa X Xi;Xb Xa X];
 B=inv(A);
 C=[Y;Ya;Yb];
 D=B*C;
-disp(D);
 c=D(3);
 b=D(2);
 a=D(1);
