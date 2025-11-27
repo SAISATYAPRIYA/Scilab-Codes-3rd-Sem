@@ -1,27 +1,28 @@
-//LEAST SQUARE FIT FOR QUADRATIC CURVE
-clf;clc;
+//Least Square fit for a Quadratic Curve of the form -  ax^2+bx+c
+clc;clf;clear;
 x = [0 1 2 3 4 5 6 7 8 9 10];
-y = [4 7 10 14 24 37 52 60 81 101 119];
-X=sum(x.^2);
-Xi=sum(x);
+y = [4 7 10 14 24 39 56 68 81 101 119];
 N=length(x);
-Xa=sum(x.^3);
-Xb=sum(x.^4);
+Xa=sum(x.^4);
+Xb=sum(x.^3);
+Xc=sum(x.^2);
+X=sum(x);
+Ya=sum(y.*(x.^2));
+Yb=sum(y.*x);
 Y=sum(y);
-Ya=sum(x.*y);
-Yb=sum(y.* (x.^2));
-A=[X Xi N;Xa X Xi;Xb Xa X];
-B=inv(A);
-C=[Y;Ya;Yb];
-D=B*C;
-c=D(3);
-b=D(2);
-a=D(1);
-yfit=c+b*x+a*(x.^2);
-plot(x,y,"+b");
-plot(x,yfit,'g');
-xlabel"X";
-ylabel"Y";
-title("Least square fit for a quadratic curve");
+Z=[Xa Xb Xc;Xb Xc X;Xc X N];
+D=inv(Z);
+E=[Ya;Yb;Y];
+F=D*E;
+a=F(1);
+b=F(2);
+c=F(3);
+yfit=a*(x.^2)+b*x+c;
+plot(x,y,"*b");
+plot(x,yfit,"r");
+xlabel("X");
+ylabel("Y");
+title("Least Square fit for a Quadratic Curve of the form -  ax^2+bx+c");
+
 
 
