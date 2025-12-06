@@ -1,0 +1,30 @@
+//Least Square fit for a curve of the form y=mx+c 
+clc;clf;clear;
+x=[00,01,02,03,04,05,06,07,08,09,10];
+y=[00,05,09,16,22,25,28,34,37,44,48];
+N=length(x);
+Xc=sum(x.^2);
+X=sum(x);
+Yb=sum(y.*x);
+Y=sum(y);
+Z=[Xc X; X N];
+D=[Yb;Y];
+E=inv(Z);
+F=E*D;
+
+m=F(1);
+disp(m);
+c=F(2);
+disp(c);   
+chi_sq=0;
+//Confirming the data by putting in the initial equation i.e.chi_sq=(y(i)-m*x(i)-c)^2
+for i=1:N
+    chi_sq=(y(i)-m*x(i)-c)^2
+end
+disp(chi_sq);
+yfit=m*x+c;
+plot(x,y,"*b");
+plot(x,yfit,"r");
+xlabel("X");
+ylabel("Y");
+title("Least Square fit for a curve of the form y=mx+c");
